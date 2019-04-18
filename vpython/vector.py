@@ -1,5 +1,6 @@
 ## vectors and associated methods
 from __future__ import annotations
+import typing
 from typing import Union, List, SupportsFloat, Optional
 from math import cos, sin, acos, sqrt, pi
 from random import random
@@ -21,25 +22,22 @@ class vector(object):
         return vector(-1.0 + 2.0*random(), -1.0 + 2.0*random(), -1.0 + 2.0*random())
 
     @typing.overload
-    def __init__(self, x: SupportsFloat, y: SupportsFloat, z: SupportsFloat) -> None:
+    def __init__(self, a: SupportsFloat, b: SupportsFloat, c: SupportsFloat) -> None:
         pass
 
     @typing.overload
-    def __init__(self, v: vector) -> None:
+    def __init__(self, a: vector, b: None, c: None) -> None:
         pass
 
-    def __init__(self, *args):
-        if len(args) == 3:
-            # make sure it's a float; could be numpy.float64
-            self._x = float(args[0])
-            self._y = float(args[1])
-            self._z = float(args[2])
-        elif isinstance(args[0], vector) and len(args) == 1:
-            # make a copy of a vector
-            other = args[0]
-            self._x = other._x
-            self._y = other._y
-            self._z = other._z
+    def __init__(self, a: Union[SupportsFloat, vector], b: Optional[SupportsFloat] = None, c: Optional[SupportsFloat] = None) -> None:
+        if isinstance(a, vector):
+            self._x = a._x
+            self._y = a._y
+            self._z = a._z
+        elif isinstance(a, SupportsFloat) and isinstance(b, SupportsFloat) and isinstance(c, SupportsFloat):
+            self._x = float(a)
+            self._y = float(b)
+            self._z = float(c)
         else:
             raise TypeError('A vector needs 3 components.')
         self.on_change = self.ignore
