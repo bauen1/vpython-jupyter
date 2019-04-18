@@ -49,7 +49,8 @@ setup_args = dict(
     ],
     ext_modules=extensions,
     install_requires=install_requires,
-    package_data={'vpython': ['vpython_data/*',
+    package_data={'vpython': ['py.typed',
+                              'vpython_data/*',
                               'vpython_libraries/*',
                               'vpython_libraries/images/*']},
 )
