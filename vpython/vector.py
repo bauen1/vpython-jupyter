@@ -34,7 +34,7 @@ class vector(object):
             self._x = a._x
             self._y = a._y
             self._z = a._z
-        elif isinstance(a, SupportsFloat) and isinstance(b, SupportsFloat) and isinstance(c, SupportsFloat):
+        elif a is not None and b is not None and c is not None:
             self._x = float(a)
             self._y = float(b)
             self._z = float(c)
